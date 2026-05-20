@@ -71,6 +71,7 @@ public class Student {
     private String previousSchool;
     private Integer durationInIconic;
     private LocalDateTime startingDate;
+    private String profileImageUrl;
 
     public Student() {}
 
@@ -197,7 +198,6 @@ public class Student {
         this.residentialStatus = residentialStatus;
     }
 
-
     public Elective getElective() {
         return elective;
     }
@@ -252,6 +252,14 @@ public class Student {
 
     public void setSession(Session session) {
         this.session = session;
+    }
+
+    public String getProfileImageUrl() {
+        return profileImageUrl;
+    }
+
+    public void setProfileImageUrl(String profileImageUrl) {
+        this.profileImageUrl = profileImageUrl;
     }
 }
 

@@ -10,9 +10,11 @@ import com.sis.iconic_sis.phone_contact.PhoneContact;
 import com.sis.iconic_sis.phone_contact.PhoneContactService;
 import com.sis.iconic_sis.session.Session;
 import com.sis.iconic_sis.session.SessionService;
+import com.sis.iconic_sis.storage.CloudStorageService;
 import com.sis.iconic_sis.student.dto.StudentCreationDTO;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDateTime;
 
@@ -23,6 +25,7 @@ public class StudentService {
     PhoneContactService phoneContactService;
     ParentService parentService;
     SessionService sessionService;
+    CloudStorageService cloudStorageService;
 
     StudentRepository studentRepo;
 
@@ -61,7 +64,17 @@ public class StudentService {
                 student.city(), student.state(), student.email(), student.residentialStatus(),
                 session, student.elective(), student.previousSchool(), 1, LocalDateTime.now()
         );
-
         studentRepo.save(newStudent);
+    }
+
+    @Transactional
+    public void saveStudentImage(Long studentId, MultipartFile file) {
+        Student student = studentRepo.findById(studentId)
+                .orElseThrow(() -> new RuntimeException("Student not found"));
+
+        String uploadedUrl = cloudStorageService.uploadImage(file);
+
+        student.setProfileImageUrl(uploadedUrl);
+        studentRepo.save(student);
     }
 }
