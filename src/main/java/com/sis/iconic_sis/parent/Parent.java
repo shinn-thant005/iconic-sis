@@ -21,7 +21,7 @@ public class Parent {
 
     private String job;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.REMOVE)
     private PhoneContact phoneContact;
 
     public Parent(String name, String nrc, ParentRole role, String job, PhoneContact phoneContact) {

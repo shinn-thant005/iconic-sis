@@ -2,12 +2,8 @@ package com.sis.iconic_sis.session;
 
 import com.sis.iconic_sis.grade.Grade;
 import com.sis.iconic_sis.room.Room;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.*;
 
-import java.util.ArrayList;
 
 @Entity
 public class Session {
@@ -16,10 +12,12 @@ public class Session {
 
     private String name;
 
-    @OneToMany
+    // Many sessions (e.g. Section A, Section B) can belong to a single Grade
+    @ManyToOne(fetch = FetchType.LAZY)
     private Grade grade;
 
-    @OneToMany
+    // Many sessions (at different times/days) can share a single physical Room
+    @ManyToOne(fetch = FetchType.LAZY)
     private Room room;
 
     private Integer capacity;

@@ -1,9 +1,6 @@
 package com.sis.iconic_sis.phone_contact;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
 public class PhoneContact {
@@ -15,6 +12,9 @@ public class PhoneContact {
     private Integer id;
     private String name;
     private String phoneNumber;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "role")
     private Role role;
 
     public PhoneContact() {}

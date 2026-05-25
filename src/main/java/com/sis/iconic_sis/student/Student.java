@@ -35,6 +35,7 @@ public class Student {
     private Gender gender;
 
     private LocalDate birthDate;
+    private String studentNrc;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Grade grade;
@@ -43,14 +44,14 @@ public class Student {
     @JoinColumn(name = "academic_year_id")
     private AcademicYear academicYear;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     private PhoneContact phoneContact;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     @JoinColumn(name = "father_id")
     private Parent father;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     @JoinColumn(name = "mother_id")
     private Parent mother;
 
@@ -64,27 +65,35 @@ public class Student {
     private ResidentialStatus residentialStatus;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @Column(name = "session_id")
+    @JoinColumn(name = "session_id")
     private Session session;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "elective")
     private Elective elective;
+
     private String previousSchool;
     private Integer durationInIconic;
     private LocalDateTime startingDate;
     private String profileImageUrl;
 
+    @Version
+    private Long version;
+
     public Student() {}
 
     public Student(
-            Long id, String name, Gender gender, LocalDate birthDate, Grade grade,
-            AcademicYear academicYear, PhoneContact phoneContact, Parent father,
+            Long id, String name, Gender gender, LocalDate birthDate, String studentNrc,
+            Grade grade, AcademicYear academicYear, PhoneContact phoneContact, Parent father,
             Parent mother, String homeAddress, String city, String state, String email,
             ResidentialStatus residentialStatus, Session session, Elective elective,
             String previousSchool, Integer durationInIconic, LocalDateTime startingDate) {
+
         this.id = id;
         this.name = name;
         this.gender = gender;
         this.birthDate = birthDate;
+        this.studentNrc = studentNrc;
         this.grade = grade;
         this.academicYear = academicYear;
         this.phoneContact = phoneContact;
@@ -260,6 +269,22 @@ public class Student {
 
     public void setProfileImageUrl(String profileImageUrl) {
         this.profileImageUrl = profileImageUrl;
+    }
+
+    public String getStudentNrc() {
+        return studentNrc;
+    }
+
+    public void setStudentNrc(String studentNrc) {
+        this.studentNrc = studentNrc;
+    }
+
+    public Long getVersion() {
+        return version;
+    }
+
+    public void setVersion(Long version) {
+        this.version = version;
     }
 }
 

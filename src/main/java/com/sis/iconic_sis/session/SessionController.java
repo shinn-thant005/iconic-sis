@@ -1,5 +1,6 @@
 package com.sis.iconic_sis.session;
 
+import com.sis.iconic_sis.session.dto.SessionCreationDTO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,9 +20,8 @@ public class SessionController {
         return sessionService.getAll();
     }
 
-    // Since the number of attribute is low, DTO isn't used
     @PostMapping("/add")
-    public ResponseEntity<Session> addSession(@RequestBody Session session) {
+    public ResponseEntity<Session> addSession(@RequestBody SessionCreationDTO session) {
         sessionService.addNewSession(session);
         return ResponseEntity.created(null).build();
     }

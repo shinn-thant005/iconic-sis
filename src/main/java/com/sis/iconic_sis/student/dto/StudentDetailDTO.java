@@ -3,26 +3,30 @@ package com.sis.iconic_sis.student.dto;
 import com.sis.iconic_sis.student.Student;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
-public record StudentCreationDTO(
+public record StudentDetailDTO(
+        String profileUrl,
         Long studentId,
         String name,
         Student.Gender gender,
         LocalDate birthDate,
         String studentNrc,
 
-        Integer gradeId,
-        Integer academicYearId,
-        String sessionId,
+        String grade,
+        String assignedSession,
+        Student.Elective elective,
+        String academicYear,
+        Student.ResidentialStatus residentialStatus,
+
 
         String homeAddress,
         String city,
         String state,
-        String email,
         String phoneNumber,
-        Student.ResidentialStatus residentialStatus,
-        Student.Elective elective,
+        String email,
         String previousSchool,
+
         String fatherName,
         String fatherNrc,
         String fatherJob,
@@ -30,6 +34,7 @@ public record StudentCreationDTO(
         String motherName,
         String motherNrc,
         String motherJob,
-        String motherPhone
+        String motherPhone,
+        LocalDateTime startingDate
 ) {
 }

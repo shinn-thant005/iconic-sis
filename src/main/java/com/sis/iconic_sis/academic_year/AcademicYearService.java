@@ -17,14 +17,15 @@ public class AcademicYearService {
     }
 
     public void addAcademicYear(AcademicYear academicYear) {
-        academicYearRepo.save(academicYear);
+        AcademicYear currentYear = new AcademicYear(academicYear.getYear());
+        academicYearRepo.save(currentYear);
     }
 
     public void deleteAcademicYearById(Integer id) {
         academicYearRepo.deleteById(id);
     }
 
-    public AcademicYear getAcademicByName(String academicYearName) {
-        return academicYearRepo.getAcademicByName(academicYearName).get();
+    public AcademicYear getAcademicByYear(String year) {
+        return academicYearRepo.getAcademicByYear(year).get();
     }
 }
